@@ -45,11 +45,11 @@ class Global_WS2812:
 
 class Global_Color:
 
-    color_def           = (  0,  0, 20)
-    color_off           = (  0,  0,  0)
-    color_on            = (100,100,100)
-    color_blink_on      = (100,100,100)
-    color_blink_off     = ( 50, 50, 50)
+    color_def           = (  0,  0, 20) # Farbwert Default      -> Blau 10%
+    color_off           = (  0,  0,  0) # Farbwert Aus          -> 0%
+    color_on            = (100,100,100) # Farbwert An           -> weiss 50% 
+    color_blink_on      = (100,100,100) # Farbwert Blinken An   -> weiss 50%
+    color_blink_off     = ( 50, 50, 50) # Farbwert Blinken Aus  -> weiss 25%
 
 class Global_Default:
 
