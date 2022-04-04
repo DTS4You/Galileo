@@ -3,7 +3,7 @@
 ### Version: 1.00                                  ###
 ######################################################
 from machine import Pin, Timer                              # RaspberryPi Pico2040 -> Hardware-Library
-from module_init import Global_WS2812 as MyGlobal           # Modul Init    -> Globale Vorgabewerte
+#from module_init import Global_WS2812 as MyGlobal           # Modul Init    -> Globale Vorgabewerte
 from module_init import Global_Module as MyModule
 import module_ws2812_v2 as MyWS2812                         # Modul WS2812  -> WS2812-Ansteuerung
 #import module_serial
@@ -52,7 +52,7 @@ def do_loop():
 def main():
 
     if MyModule.ws2812:
-        print("Start of Main")
+        print("WS2812 -> Load-Module")
         # WS2812 Setup
         print("WS2812 -> Setup")
         MyWS2812.setup_ws2812()
@@ -66,6 +66,9 @@ def main():
         print("WS2812 -> Dot-Test")
         MyWS2812.do_dot_test()
 
+    if MyModule.cmd_decoder:
+        print("CMD-Decoder -> Load-Module")
+    
     # Serial-COM
     #module_serial.sercon_setup()
     #module_serial.sercon_write_test()
