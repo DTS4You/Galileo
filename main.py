@@ -50,13 +50,19 @@ def do_loop():
 # ------------------------------------------------------------------------------
 def main():
 
+    print("Start of Main")
     # WS2812 Setup
     print("WS2812 -> Setup")
     MyWS2812.setup_ws2812()
+    # WS2812 Self-Test
     print("WS2812 -> Run self test")
     MyWS2812.self_test()
+    # WS2812 Blink Test
     print("WS2812 -> Blink Test")
     MyWS2812.do_blink_test()
+    # WS2812 Dot Test
+    print("WS2812 -> Dot-Test")
+    MyWS2812.do_dot_test()
 
     # Serial-COM
     #module_serial.sercon_setup()
