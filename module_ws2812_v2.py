@@ -55,7 +55,14 @@ class Ledsegment:
     def set_color_value(self, color_value):
         self.color_value = color_value
 
-    def set_pixel(self, pixel_num):
+    def set_color_show(self, color_value):
+        self.color_show = color_value
+        
+    def set_pixel(self, pixel_num, color=None):
+        if color:
+            self.color_value = color
+        else:
+            self.color_value = self.color_show
         self.neopixel.set_pixel(self.start + pixel_num, self.color_value)
 
     def rotate_right(self):
@@ -145,6 +152,7 @@ def setup_ws2812():
         leds.set_color_def(color_def)
         leds.set_color_on(color_on)
         leds.set_color_value(color_dot)
+        leds.set_color_show(color_dot)
     
     # Blinken aus
     do_all_no_blink()
@@ -263,9 +271,15 @@ def do_obj_on_off_def_off():
         do_refresh()
 
 def do_dot_test():
-    delay_time = 0.3
-    for x in range(len(led_obj)):
-        led_obj[x].set_pixel(2)
+    delay_time = 0.1
+    color_now = (0,80,20)           # Grün
+    for y in range(len(led_obj)):
+        led_obj[y].set_color_value(color_now)
+        for x in range(led_obj[y].count):
+            led_obj[y].set_pixel(x)
+            do_refresh()
+            time.sleep(delay_time)
+        led_obj[y].show_off()
         do_refresh()
         time.sleep(delay_time)
         
