@@ -1,6 +1,7 @@
 # Module WS2812 V1.01
 import time
 import module_neopixel
+from module_init import Global_WS2812 as MyGlobal
 
 
 class LedState:
@@ -33,11 +34,14 @@ class Ledsegment:
         self.start = start
         self.stop = self.start + count - 1
         self.count = count
+        self.position = 0
+        self.run_state = False
         self.blink_state = False
         self.color_on = (0,0,0)
         self.color_default = (0,0,0)
         self.color_off = (0,0,0)
         self.color_show = (0,0,0)
+        self.color_value = (0,0,0)
 
     def set_color_on(self, color_on):
         self.color_on = color_on
@@ -48,20 +52,29 @@ class Ledsegment:
     def set_color_off(self, color_off):
         self.color_off = color_off
 
+    def set_color_value(self, color_value):
+        self.color_value = color_value
+
+    def set_pixel(self, pixel_num):
+        self.neopixel.set_pixel(self.start + pixel_num, self.color_value)
+
+    def rotate_right(self):
+        pass
+
     def show_on(self):
         self.color_show = self.color_on
         self.blink_state = False
-        self.set_pixel()
+        self.set_line()
 
     def show_def(self):
         self.color_show = self.color_default
         self.blink_state = False
-        self.set_pixel()
+        self.set_line()
 
     def show_off(self):
         self.color_show = self.color_off
         self.blink_state = False
-        self.set_pixel()
+        self.set_line()
 
     def show_blink(self):
         self.blink_state = True
@@ -69,12 +82,12 @@ class Ledsegment:
             self.color_show = self.color_on
         else:
             self.color_show = self.color_off
-        self.set_pixel()
+        self.set_line()
 
     def get_blink_state(self):
         return self.blink_state
 
-    def set_pixel(self):
+    def set_line(self):
         self.neopixel.set_pixel_line(self.start, self.stop, self.color_show)
 
     def show_stripe(self):
@@ -86,7 +99,9 @@ def setup_ws2812():
     global strip_obj
     global led_obj
     global ledstate
-    # global mg
+    global mg
+    
+    mg = MyGlobal
     
     led_obj = []
     strip_obj = []
@@ -112,6 +127,7 @@ def setup_ws2812():
     color_def = (0,0,20)
     color_off = (0,0,0)
     color_on = (100,100,100)
+    color_dot = (0,70,0)
     
 
     for strips in strip_obj:
@@ -128,6 +144,7 @@ def setup_ws2812():
         leds.set_color_off(color_off)
         leds.set_color_def(color_def)
         leds.set_color_on(color_on)
+        leds.set_color_value(color_dot)
     
     # Blinken aus
     do_all_no_blink()
@@ -191,7 +208,7 @@ def set_all_def():                              # Setze Farbwerte in alle LED-Ob
         leds.show_def()
     ledstate.refresh()
 
-def self_test():                                # Pro Stripe einmal Aus-RGB (25%) -Aus 
+def self_test():                                # Pro Stripe einmal Aus-RGB(25%) -Aus 
     for strips in strip_obj:
         # Alle Aus
         strips.set_pixel_line(0, strips.num_leds - 1, (0,0,0))
@@ -229,36 +246,51 @@ def do_blink_test():
         do_refresh()
     
 
-def run_ws2812():
-
-    while True:
-        do_test_off()
+def do_obj_on_off_def_off():
+    
+    delay_time = 0.3
+    for x in range(len(led_obj)):
+        led_obj[x].show_on()
         do_refresh()
-        time.sleep(0.3)
-        do_test_on()
+        time.sleep(delay_time)
+        led_obj[x].show_off()
         do_refresh()
-        time.sleep(0.3)
+        time.sleep(delay_time)
+        led_obj[x].show_def()
+        do_refresh()
+        time.sleep(delay_time)
+        led_obj[x].show_off()
+        do_refresh()
 
+def do_dot_test():
+    delay_time = 0.3
+    for x in range(len(led_obj)):
+        led_obj[x].set_pixel(1)
+        do_refresh()
+        time.sleep(delay_time)
+        
+def do_rot_r_test():
+    led_obj[1].rotate_right()
+    do_refresh()
 
 def main():
-
-    global mg
-
-    import module_init
-    mg = module_init.MyGlobal
     
     print("WS2812 -> Setup")
     setup_ws2812()
         
-    print("WS2812 -> Run self test")
-    self_test()
+    #print("WS2812 -> Run self test")
+    #self_test()
     
-    print("Blink Test")
-    do_blink_test()
-    
-    #print("Ende")
-    #print("WS2812 Run")
-    #run_ws2812()
+    #print("Blink Test")
+    #do_blink_test()
+
+    #print("Object Test")
+    #do_obj_on_off_def_off()
+
+    print("LED-Dot-Test")
+    do_dot_test()
+
+    print("End of Program !!!")
 
 
 # End

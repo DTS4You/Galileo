@@ -1,7 +1,9 @@
 ### Main-Program ###
+### Version 0.99 ###
+####################
 from machine import Pin, Timer
-import module_init
-import module_ws2812
+from module_init import Global_WS2812 as MyGlobal
+import module_ws2812_v2 as MyWS2812
 #import module_serial
 #import module_decode
 #import time
@@ -25,7 +27,7 @@ def do_loop():
         # Blink Timer Flag
         if flag:
             flag = False
-            module_ws2812.do_blink()
+            MyWS2812.do_blink()
 
             # Serialread Data
             if module_serial.sercon.read():
@@ -47,16 +49,13 @@ def do_loop():
 # ------------------------------------------------------------------------------
 def main():
 
-    global mg
-
-    # Global-Init
-    mg = module_init.MyGlobal
-    print(mg.seg_01_strip)
-
     # WS2812 Setup
-    module_ws2812.setup_ws2812()
-    module_ws2812.self_test()
-    module_ws2812.do_blink_test()
+    print("WS2812 -> Setup")
+    MyWS2812.setup_ws2812()
+    print("WS2812 -> Run self test")
+    MyWS2812.self_test()
+    print("WS2812 -> Blink Test")
+    MyWS2812.do_blink_test()
 
     # Serial-COM
     #module_serial.sercon_setup()
@@ -73,6 +72,7 @@ def main():
     # LEDs auf Startbild
     #module_ws2812.do_all_def()
 
+    print("End of Main !")
 
 # ==============================================================================
 # ==============================================================================
