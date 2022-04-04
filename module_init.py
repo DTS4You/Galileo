@@ -2,6 +2,13 @@
 # ### MyGlobal
 # #############################################################################
 
+#from module_neopixel import ws2812
+
+
+class Global_Module:
+    
+    ws2812              = True
+
 class Global_WS2812:
 
     seg_len             = 8      

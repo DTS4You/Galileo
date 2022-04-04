@@ -4,9 +4,10 @@
 ######################################################
 from machine import Pin, Timer                              # RaspberryPi Pico2040 -> Hardware-Library
 from module_init import Global_WS2812 as MyGlobal           # Modul Init    -> Globale Vorgabewerte
+from module_init import Global_Module as MyModule
 import module_ws2812_v2 as MyWS2812                         # Modul WS2812  -> WS2812-Ansteuerung
 #import module_serial
-#import module_decode
+import module_decode as MyDecode
 #import time
 
 # led = Pin(25, Pin.OUT)        # Debug LED
@@ -50,19 +51,20 @@ def do_loop():
 # ------------------------------------------------------------------------------
 def main():
 
-    print("Start of Main")
-    # WS2812 Setup
-    print("WS2812 -> Setup")
-    MyWS2812.setup_ws2812()
-    # WS2812 Self-Test
-    print("WS2812 -> Run self test")
-    MyWS2812.self_test()
-    # WS2812 Blink Test
-    print("WS2812 -> Blink Test")
-    MyWS2812.do_blink_test()
-    # WS2812 Dot Test
-    print("WS2812 -> Dot-Test")
-    MyWS2812.do_dot_test()
+    if MyModule.ws2812:
+        print("Start of Main")
+        # WS2812 Setup
+        print("WS2812 -> Setup")
+        MyWS2812.setup_ws2812()
+        # WS2812 Self-Test
+        print("WS2812 -> Run self test")
+        MyWS2812.self_test()
+        # WS2812 Blink Test
+        print("WS2812 -> Blink Test")
+        MyWS2812.do_blink_test()
+        # WS2812 Dot Test
+        print("WS2812 -> Dot-Test")
+        MyWS2812.do_dot_test()
 
     # Serial-COM
     #module_serial.sercon_setup()
@@ -93,6 +95,6 @@ if __name__ == "__main__":
     main()
 
 # Normal sollte das Programm hier nie ankommen !
-print("End of Programm !!!")
+print("___End of Programm___ !!!")
 
 # ##############################################################################

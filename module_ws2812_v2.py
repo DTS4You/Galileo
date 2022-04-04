@@ -298,7 +298,7 @@ def main():
     print("WS2812 -> LED-Dot-Test")
     do_dot_test()
 
-    print("End of Program !!!")
+    print("WS2812 -> End of Program !!!")
 
 
 # End
