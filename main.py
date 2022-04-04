@@ -1,10 +1,10 @@
-####################
-### Main-Program ###
-### Version 0.99 ###
-####################
-from machine import Pin, Timer
-from module_init import Global_WS2812 as MyGlobal
-import module_ws2812_v2 as MyWS2812
+######################################################
+### Main-Program                                   ###
+### Version: 1.00                                  ###
+######################################################
+from machine import Pin, Timer                              # RaspberryPi Pico2040 -> Hardware-Library
+from module_init import Global_WS2812 as MyGlobal           # Modul Init    -> Globale Vorgabewerte
+import module_ws2812_v2 as MyWS2812                         # Modul WS2812  -> WS2812-Ansteuerung
 #import module_serial
 #import module_decode
 #import time

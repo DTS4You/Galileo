@@ -268,10 +268,12 @@ def do_obj_on_off_def_off():
         do_refresh()
 
 def do_dot_test():
-    delay_time = 0.1
+    delay_time = 0.2
     color_now = (0,10,60)
     for y in range(len(led_obj)):
         for x in range(led_obj[y].count):
+            if x > 0:
+                led_obj[y].set_pixel(x - 1, (0,0,0))
             led_obj[y].set_pixel(x, color_now)
             do_refresh()
             time.sleep(delay_time)
@@ -284,16 +286,16 @@ def main():
     print("WS2812 -> Setup")
     setup_ws2812()
         
-    #print("WS2812 -> Run self test")
+    print("WS2812 -> Run self test")
     self_test()
     
-    #print("Blink Test")
-    #do_blink_test()
+    print("WS2812 -> Blink Test")
+    do_blink_test()
 
-    #print("Object Test")
-    #do_obj_on_off_def_off()
+    print("WS2812 -> Object Test")
+    do_obj_on_off_def_off()
 
-    print("LED-Dot-Test")
+    print("WS2812 -> LED-Dot-Test")
     do_dot_test()
 
     print("End of Program !!!")
