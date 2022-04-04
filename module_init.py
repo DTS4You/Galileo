@@ -7,8 +7,10 @@
 
 class Global_Module:
     
-    ws2812              = True
-    cmd_decoder         = False
+    inc_ws2812          = True
+    inc_decoder         = True
+    inc_serial          = False
+
 
 class Global_WS2812:
 
