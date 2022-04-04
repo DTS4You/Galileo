@@ -127,7 +127,7 @@ def setup_ws2812():
     color_def = (0,0,20)
     color_off = (0,0,0)
     color_on = (100,100,100)
-    color_dot = (0,70,0)
+    color_dot = (0,80,30)
     
 
     for strips in strip_obj:
@@ -265,7 +265,7 @@ def do_obj_on_off_def_off():
 def do_dot_test():
     delay_time = 0.3
     for x in range(len(led_obj)):
-        led_obj[x].set_pixel(1)
+        led_obj[x].set_pixel(2)
         do_refresh()
         time.sleep(delay_time)
         
@@ -279,7 +279,7 @@ def main():
     setup_ws2812()
         
     #print("WS2812 -> Run self test")
-    #self_test()
+    self_test()
     
     #print("Blink Test")
     #do_blink_test()
