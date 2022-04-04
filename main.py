@@ -5,9 +5,9 @@
 from machine import Pin, Timer                              # RaspberryPi Pico2040 -> Hardware-Library
 #from module_init import Global_WS2812 as MyGlobal           # Modul Init    -> Globale Vorgabewerte
 from module_init import Global_Module as MyModule
-import module_ws2812_v2 as MyWS2812                         # Modul WS2812  -> WS2812-Ansteuerung
+
 #import module_serial
-import module_decode as MyDecode
+
 #import time
 
 # led = Pin(25, Pin.OUT)        # Debug LED
@@ -53,21 +53,24 @@ def main():
 
     if MyModule.ws2812:
         print("WS2812 -> Load-Module")
-        # WS2812 Setup
+        import module_ws2812_v2 as MyWS2812         # Modul WS2812  -> WS2812-Ansteuerung
         print("WS2812 -> Setup")
         MyWS2812.setup_ws2812()
-        # WS2812 Self-Test
         print("WS2812 -> Run self test")
         MyWS2812.self_test()
-        # WS2812 Blink Test
         print("WS2812 -> Blink Test")
         MyWS2812.do_blink_test()
-        # WS2812 Dot Test
         print("WS2812 -> Dot-Test")
         MyWS2812.do_dot_test()
 
     if MyModule.cmd_decoder:
         print("CMD-Decoder -> Load-Module")
+        import module_decode as MyDecode
+        print("Decode -> Setup")
+        MyDecode.decode_setup()
+        print("Decode -> Test")
+        MyDecode.decode_test()
+
     
     # Serial-COM
     #module_serial.sercon_setup()
