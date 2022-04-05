@@ -2,9 +2,6 @@
 # ### MyGlobal
 # #############################################################################
 
-#from module_neopixel import ws2812
-
-
 class Global_Module:
     
     inc_ws2812          = True
