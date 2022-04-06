@@ -69,20 +69,13 @@ class Decoder:
             elif self.array[1] == "all":
                 if self.array[2] == "on" and self.arrary_len == 3:
                     self.valid_flag = True
-                    #module_ws2812.do_all_no_blink()
-                    #module_ws2812.do_all_on()
                     
-                if self.array[2] == "off":
-                    #print("do,all,off")
+                if self.array[2] == "off" and self.arrary_len == 3:
                     self.valid_flag = True
-                    #module_ws2812.do_all_no_blink()
-                    #module_ws2812.do_all_off()
 
-                if self.array[2] == "def":
-                    #print("do,all,def")
+                if self.array[2] == "def" and self.arrary_len == 3:
                     self.valid_flag = True
-                    #module_ws2812.do_all_no_blink()
-                    #module_ws2812.do_all_def()
+
             else:
                 self.valid_flag = False
 
@@ -105,19 +98,12 @@ def decode_printout():
         print("no valid command")
 
 
-def decode_test():
-    
-    test_string = "do,led,0,10,on"
-    
+def decode_test(test_string):
+        
     cmd_dec.send_data(test_string)
     
     decode_printout()
 
-    test_string = "do,all,on"
-    
-    cmd_dec.send_data(test_string)
-
-    decode_printout()
 
 
 # ------------------------------------------------------------------------------
@@ -125,9 +111,18 @@ def decode_test():
 # ------------------------------------------------------------------------------
 def main():
 
+    print("Decode -> Setup")
     decode_setup()
+    print("Decode -> Test")
+    print("-----------------------------------")
+    #decode_test("do,led,0,10,on")
+    #print("-----------------------------------")
+    decode_test("do,obj,1,def")
+    print("-----------------------------------")
+    #decode_test("do,all,on")
+    #print("-----------------------------------")
 
-    decode_test()
+
 
 # ==============================================================================
 
