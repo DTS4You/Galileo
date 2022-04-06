@@ -68,10 +68,13 @@ def main():
         print("Decode -> Test")
         MyDecode.decode_test()
 
-    
-    # Serial-COM
-    #module_serial.sercon_setup()
-    #module_serial.sercon_write_test()
+    if MyModule.inc_serial:
+        print("Serial-COM -> Load-Module")
+        import module_serial as MySerial
+        print("Serial-Con -> Setup")
+        MySerial.sercon_setup()
+        print("Serial-Con -> Test")
+        MySerial.sercon_write_test()
 
     # Decode
     #module_decode.decode_setup()
