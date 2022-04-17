@@ -21,6 +21,9 @@ def do_loop():
     # --------------------------------------------------------------------------
     # --- Loop forever
     # --------------------------------------------------------------------------
+
+    read_loop = MySerial.sercon.read_loop
+
     while True:
 
         # Blink Timer Flag
@@ -74,7 +77,7 @@ def main():
         print("Serial-Con -> Setup")
         MySerial.sercon_setup()
         print("Serial-Con -> Test")
-        MySerial.sercon_write_test()
+        MySerial.sercon_write_out("Test")
 
 
     print("End of Main !")

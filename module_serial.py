@@ -13,7 +13,7 @@ class SERCON:
         self.txData = bytes()
         self.flag = True
         self.read_string = ""
-        self.read_loop = True
+        self.read_flag = True
 
     def write(self, string):
         self.txData = str.encode(string)
@@ -47,6 +47,16 @@ def sercon_write_out(string):
     string = string + "\n"
     sercon.write(string)
 
+def sercon_read_flag():
+    return sercon.read_flag
+
+def sercon_read_line():
+    if sercon.read():
+        print(sercon.read_string)
+        sercon.write("ack\n")
+        if sercon.read_string == "EOT":
+            sercon.read_flag = False
+
 def main():
     
     sercon_setup()
@@ -58,14 +68,8 @@ def main():
 
     print("Read Loop")
     
-    read_loop = sercon.read_loop
-    
-    while read_loop:
-        if sercon.read():
-            print(sercon.read_string)
-            sercon.write("ack\n")
-            if sercon.read_string == "EOT":
-                read_loop = False
+    while sercon_read_flag():
+        sercon_read_line()
             
         
         # Loop-Delay !!!
