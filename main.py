@@ -76,16 +76,6 @@ def main():
         print("Serial-Con -> Test")
         MySerial.sercon_write_test()
 
-    # Decode
-    #module_decode.decode_setup()
-    #module_decode.decode_test()
-
-    # Timer definieren
-    #timer_blink = Timer()
-    #timer_blink.init(freq=blink_freq, mode=Timer.PERIODIC, callback=tick)
-
-    # LEDs auf Startbild
-    #module_ws2812.do_all_def()
 
     print("End of Main !")
 
