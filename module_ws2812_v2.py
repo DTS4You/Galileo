@@ -207,8 +207,19 @@ def do_refresh():
 def do_get_state():
 
     return ledstate.get()
-    
-def set_all_def():                              # Setze Farbwerte in alle LED-Objekte
+
+def set_all_off():                          # Setze Farbwerte in alle LED-Objekte
+    # Setze Farbwerte in alle LED-Objekte
+    for leds in led_obj:
+        leds.show_off()
+    ledstate.refresh()
+
+def set_all_def():                          # Setze Farbwerte in alle LED-Objekte
+    for leds in led_obj:
+        leds.show_def()
+    ledstate.refresh()
+
+def set_all_on():                           # Setze Farbwerte in alle LED-Objekte
     for leds in led_obj:
         leds.show_def()
     ledstate.refresh()
@@ -296,8 +307,8 @@ def main():
     #print("WS2812 -> Run self test")
     #self_test()
     
-    #print("WS2812 -> Blink Test")
-    #do_blink_test()
+    print("WS2812 -> Blink Test")
+    do_blink_test()
 
     #print("WS2812 -> Object Test")
     #do_obj_on_off_def_off()
@@ -305,7 +316,9 @@ def main():
     #print("WS2812 -> LED-Dot-Test")
     #do_dot_test()
 
+    set_all_def()
     
+    time.sleep(0.5)
 
     set_led_obj(0,0)
 
@@ -317,6 +330,9 @@ def main():
 
     set_led_obj(0,0)
 
+    time.sleep(0.5)
+
+    set_all_off()
 
     print("WS2812 -> End of Program !!!")
 

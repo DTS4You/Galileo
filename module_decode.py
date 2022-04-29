@@ -45,7 +45,7 @@ class Decoder:
         return self.array
 
     def cmd_decode(self):
-        if self.array[0] == "set":
+        if self.array[0] == "set" and self.arrary_len > 1:
             if self.array[1] == "on":
                 print("Parameter -> On")
             if self.array[1] == "off":
@@ -54,26 +54,33 @@ class Decoder:
                 print("Parameter -> Default")
             if self.array[1] == "bri":
                 print("Parameter -> Brightness")
-        elif self.array[0] == "do":
+        elif self.array[0] == "do" and self.arrary_len > 2:
+            self.cmd_1 = "do"
             if self.array[1] == "led" and self.arrary_len == 5:
+                self.cmd_2 = "led"
                 self.value_1 = int(self.array[2])
                 self.value_2 = int(self.array[3])
                 self.value_3 = (self.array[4])
                 self.valid_flag = True
 
             elif self.array[1] == "obj" and self.arrary_len == 4:
+                self.cmd_2 = "obj"
                 self.value_1 = int(self.array[2])
                 self.value_2 = self.array[3]
                 self.valid_flag = True
 
             elif self.array[1] == "all":
+                self.cmd_2 = "all"
                 if self.array[2] == "on" and self.arrary_len == 3:
+                    self.value_1 = 1
                     self.valid_flag = True
                     
                 if self.array[2] == "off" and self.arrary_len == 3:
+                    self.value_1 = 0
                     self.valid_flag = True
 
                 if self.array[2] == "def" and self.arrary_len == 3:
+                    self.value_1 = 2
                     self.valid_flag = True
 
             else:
@@ -102,9 +109,29 @@ def decode_input(test_string):
         
     cmd_dec.send_data(test_string)
     
-    decode_printout()
+    #decode_printout()
 
+def get_cmd_1():
+    return cmd_dec.cmd_1
+    
+def get_cmd_2():
+    return cmd_dec.cmd_2
 
+def get_value_1():
+    return cmd_dec.value_1
+
+def get_value_2():
+    return cmd_dec.value_2
+
+def get_value_3():
+    return cmd_dec.value_3
+
+def get_valid_flag():
+    return cmd_dec.valid_flag
+
+def get_array_len():
+    return cmd_dec.arrary_len
+  
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
@@ -117,7 +144,9 @@ def main():
     print("-----------------------------------")
     #decode_test("do,led,0,10,on")
     #print("-----------------------------------")
-    decode_input("do,obj,1,def")
+    decode_input("do,obj,4,def")
+    decode_printout()
+    print(get_cmd_1())
     print("-----------------------------------")
     #decode_test("do,all,on")
     #print("-----------------------------------")

@@ -7,16 +7,9 @@ from module_init import Global_Module as MyModule
 #import module_serial
 import time
 
-# led = Pin(25, Pin.OUT)        # Debug LED
-flag = False
 
-blink_freq = 3.0        # Blink Frequenz
-
-def tick(timer):
-    global flag
-    flag = True
-
-
+def blink_func():
+    pass
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
@@ -25,15 +18,37 @@ def main():
 
     print("=== Start Main ===")
     
+    blink_couter = 0
        
     while MySerial.sercon_read_flag():
+
+        if blink_couter > 20:
+            blink_func()
         MySerial.sercon_read_line()
         if MySerial.get_ready_flag():       # Zeichenkette empfangen
-            print(MySerial.get_string())
+            #print(MySerial.get_string())
             MyDecode.decode_input(str(MySerial.get_string()))
+            #MyDecode.decode_printout()
+            if MyDecode.get_valid_flag() == True:
+                print("Valid Command")
+                if MyDecode.get_cmd_1() == "do":
+                    print("do")
+                    if MyDecode.get_cmd_2() == "all":
+                        print("all")
+                        if MyDecode.get_value_1() == 0:
+                            print("off")
+                            MyWS2812.do_all_off()
+                        if MyDecode.get_value_1() == 2:
+                            print("def")
+                            MyWS2812.do_all_def()
         
+
+        blink_couter = blink_couter + 1
         # Loop-Delay !!!
         time.sleep(0.01)
+        
+        
+
         
 
 
