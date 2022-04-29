@@ -69,7 +69,7 @@ def main():
         print("Decode -> Setup")
         MyDecode.decode_setup()
         print("Decode -> Test")
-        MyDecode.decode_test()
+        MyDecode.decode_test("Test")
 
     if MyModule.inc_serial:
         print("Serial-COM -> Load-Module")
