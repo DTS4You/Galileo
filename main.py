@@ -17,34 +17,6 @@ def tick(timer):
     flag = True
 
 
-def do_loop():
-    # --------------------------------------------------------------------------
-    # --- Loop forever
-    # --------------------------------------------------------------------------
-
-    read_loop = MySerial.sercon.read_loop
-
-    while True:
-
-        # Blink Timer Flag
-        if flag:
-            flag = False
-            MyWS2812.do_blink()
-
-            # Serialread Data
-            if module_serial.sercon.read():
-                # print(module_serial.sercon.get_string())
-                module_decode.cmd_dec.send_data(module_serial.sercon.get_string())
-                if module_decode.cmd_dec.get_valid_flag():
-                    module_serial.sercon.write("ack\n")
-                    module_decode.cmd_dec.res_valid_flag()
-                else:
-                    module_serial.sercon.write("error\n")
-
-            # Loop-Delay !!!
-        time.sleep(0.05)
-        # --------------------------------------------------------------------------
-
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
@@ -56,15 +28,16 @@ def main():
        
     while MySerial.sercon_read_flag():
         MySerial.sercon_read_line()
-            
+        if MySerial.get_ready_flag():
+            print(MySerial.get_string())    
         
         # Loop-Delay !!!
         time.sleep(0.01)
         
-    MySerial.sercon_write_out("End of Loop")
 
 
-    print("End of Main !")
+
+    print("=== End of Main ===")
 
 # ==============================================================================
 # ==============================================================================
@@ -82,12 +55,12 @@ if __name__ == "__main__":
         print("WS2812 -> Setup")
         MyWS2812.setup_ws2812()
         ### Test ###
-        print("WS2812 -> Run self test")
-        MyWS2812.self_test()
-        print("WS2812 -> Blink Test")
-        MyWS2812.do_blink_test()
-        print("WS2812 -> Dot-Test")
-        MyWS2812.do_dot_test()
+        #print("WS2812 -> Run self test")
+        #MyWS2812.self_test()
+        #print("WS2812 -> Blink Test")
+        #MyWS2812.do_blink_test()
+        #print("WS2812 -> Dot-Test")
+        #MyWS2812.do_dot_test()
 
     if MyModule.inc_decoder:
         print("Decode -> Load-Module")
@@ -95,8 +68,8 @@ if __name__ == "__main__":
         print("Decode -> Setup")
         MyDecode.decode_setup()
         ### Test ###
-        print("Decode -> Test")
-        MyDecode.decode_test("Test")
+        #print("Decode -> Test")
+        #MyDecode.decode_test("Test")
 
     if MyModule.inc_serial:
         print("Serial-COM -> Load-Module")
@@ -105,7 +78,7 @@ if __name__ == "__main__":
         MySerial.sercon_setup()
         ### Test ###
         print("Serial-Con -> Test")
-        MySerial.sercon_write_out("Test")
+        MySerial.sercon_write_out("Start Test")
 
     main()      # Start Main $$$
 

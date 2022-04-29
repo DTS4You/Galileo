@@ -14,6 +14,7 @@ class SERCON:
         self.flag = True
         self.read_string = ""
         self.read_flag = True
+        self.ready_flag = False
 
     def write(self, string):
         self.txData = str.encode(string)
@@ -50,13 +51,21 @@ def sercon_write_out(string):
 def sercon_read_flag():
     return sercon.read_flag
 
+def get_string():
+    return sercon.read_string
+
+def get_ready_flag():
+    return sercon.ready_flag
+
 def sercon_read_line():
     if sercon.read():
-        print(sercon.read_string)
+        sercon.ready_flag = True
+        #print(sercon.read_string)
         sercon.write("ack\n")
         if sercon.read_string == "EOT":
             sercon.read_flag = False
-
+    else:
+        sercon.ready_flag = False
 
 ###############################################################################
 ### Main()
@@ -75,7 +84,8 @@ def main():
     
     while sercon_read_flag():
         sercon_read_line()
-            
+        if sercon.ready_flag:
+            print(get_string())    
         
         # Loop-Delay !!!
         time.sleep(0.01)
