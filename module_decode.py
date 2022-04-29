@@ -98,7 +98,7 @@ def decode_printout():
         print("no valid command")
 
 
-def decode_test(test_string):
+def decode_input(test_string):
         
     cmd_dec.send_data(test_string)
     
@@ -117,7 +117,7 @@ def main():
     print("-----------------------------------")
     #decode_test("do,led,0,10,on")
     #print("-----------------------------------")
-    decode_test("do,obj,1,def")
+    decode_input("do,obj,1,def")
     print("-----------------------------------")
     #decode_test("do,all,on")
     #print("-----------------------------------")

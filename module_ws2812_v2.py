@@ -281,25 +281,44 @@ def do_dot_test():
         do_refresh()
         time.sleep(delay_time)
         
+def set_led_obj(obj,state):
+    if state == 0:
+        led_obj[obj].show_off()
+    if state == 1:
+        led_obj[obj].show_def()
+    do_refresh()
+
 def main():
     
     print("WS2812 -> Setup")
     setup_ws2812()
         
-    print("WS2812 -> Run self test")
-    self_test()
+    #print("WS2812 -> Run self test")
+    #self_test()
     
-    print("WS2812 -> Blink Test")
-    do_blink_test()
+    #print("WS2812 -> Blink Test")
+    #do_blink_test()
 
-    print("WS2812 -> Object Test")
-    do_obj_on_off_def_off()
+    #print("WS2812 -> Object Test")
+    #do_obj_on_off_def_off()
 
-    print("WS2812 -> LED-Dot-Test")
-    do_dot_test()
+    #print("WS2812 -> LED-Dot-Test")
+    #do_dot_test()
+
+    
+
+    set_led_obj(0,0)
+
+    time.sleep(0.5)
+
+    set_led_obj(0,1)
+
+    time.sleep(0.5)
+
+    set_led_obj(0,0)
+
 
     print("WS2812 -> End of Program !!!")
-
 
 # End
 

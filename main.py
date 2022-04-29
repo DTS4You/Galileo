@@ -28,8 +28,9 @@ def main():
        
     while MySerial.sercon_read_flag():
         MySerial.sercon_read_line()
-        if MySerial.get_ready_flag():
-            print(MySerial.get_string())    
+        if MySerial.get_ready_flag():       # Zeichenkette empfangen
+            print(MySerial.get_string())
+            MyDecode.decode_input(str(MySerial.get_string()))
         
         # Loop-Delay !!!
         time.sleep(0.01)
@@ -69,7 +70,7 @@ if __name__ == "__main__":
         MyDecode.decode_setup()
         ### Test ###
         #print("Decode -> Test")
-        #MyDecode.decode_test("Test")
+        #MyDecode.decode_input("Test")
 
     if MyModule.inc_serial:
         print("Serial-COM -> Load-Module")
