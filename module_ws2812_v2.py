@@ -293,10 +293,14 @@ def do_dot_test():
         time.sleep(delay_time)
         
 def set_led_obj(obj,state):
-    if state == 0:
+    if state == "off":
         led_obj[obj].show_off()
-    if state == 1:
+    if state == "def":
         led_obj[obj].show_def()
+    if state == "on":
+        led_obj[obj].show_on()
+    if state == "blink":
+        led_obj[obj].show_blink()
     do_refresh()
 
 def main():
