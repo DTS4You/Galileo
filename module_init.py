@@ -54,13 +54,13 @@ class Global_WS2812:
     seg_10_start        = seg_len * 2   # 10. Ledsegment -> Start
     seg_10_count        = seg_len       # 10. Ledsegment -> Anzahl
 
-class Global_Color:
-
-    color_def           = (  0,  0,  3)
+    color_def           = (  0,  0, 10)
     color_off           = (  0,  0,  0)
     color_on            = (100,100,100)
+    color_dot           = ( 50, 50, 50)
     color_blink_on      = (100,100,100)
     color_blink_off     = ( 50, 50, 50)
+
 
 class Global_Default:
 

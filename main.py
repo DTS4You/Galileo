@@ -11,7 +11,7 @@ import time
 segment_map = (  0 ,  7 ,  8 ,  9 ,  6 ,  0 ,  1 ,  3 ,  2 ,  5 ,  4 )
 
 def blink_func():
-    pass
+    MyWS2812.do_blink()
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
@@ -24,8 +24,10 @@ def main():
        
     while MySerial.sercon_read_flag():
 
-        if blink_couter > 20:
+        if blink_couter > 50:
+            blink_couter = 0
             blink_func()
+        
         MySerial.sercon_read_line()
         if MySerial.get_ready_flag():       # Zeichenkette empfangen
             #print(MySerial.get_string())
