@@ -12,7 +12,8 @@ class Global_Module:
 
 class Global_WS2812:
 
-    seg_len             = 31            # Anzahl pro Segment -> Modell real      
+    #seg_len            = 8             # Testaufbau 8
+    seg_len             = 31            # Modell 31
 
     numpix_1            = seg_len * 2   # Anzahl LEDs im 1. Stripe
     numpix_2            = seg_len * 2   # Anzahl LEDs im 2. Stripe
