@@ -56,7 +56,7 @@ def main():
 
         blink_couter = blink_couter + 1
         # Loop-Delay !!!
-        time.sleep(0.01)
+        time.sleep(0.01)        # 10ms
         
         
 
