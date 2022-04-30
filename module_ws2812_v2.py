@@ -300,7 +300,7 @@ def set_led_obj(obj,state):
     if state == "on":
         led_obj[obj].show_on()
     if state == "blink":
-        led_obj[obj].show_blink()
+        led_obj[obj].show_on()
     do_refresh()
 
 def main():
