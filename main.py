@@ -50,7 +50,7 @@ def main():
                         #print("obj")
                         #print(MyDecode.get_value_1())
                         #print(segment_map[MyDecode.get_value_1()])
-                        MyWS2812.set_led_obj(MyDecode.get_value_1(), MyDecode.get_value_2())
+                        MyWS2812.set_led_obj(segment_map[MyDecode.get_value_1()], MyDecode.get_value_2())
 
         blink_couter = blink_couter + 1
         # Loop-Delay !!!
