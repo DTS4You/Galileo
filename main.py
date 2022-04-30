@@ -38,6 +38,9 @@ def main():
                         if MyDecode.get_value_1() == 0:
                             print("off")
                             MyWS2812.do_all_off()
+                        if MyDecode.get_value_1() == 1:
+                            print("on")
+                            MyWS2812.do_all_on()
                         if MyDecode.get_value_1() == 2:
                             print("def")
                             MyWS2812.do_all_def()
