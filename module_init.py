@@ -12,12 +12,12 @@ class Global_Module:
 
 class Global_WS2812:
 
-    seg_len             = 8      
+    seg_len             = 31            # Anzahl pro Segment -> Modell real      
 
-    numpix_1            = seg_len * 2        # Anzahl LEDs im 1. Stripe
-    numpix_2            = seg_len * 2        # Anzahl LEDs im 2. Stripe
-    numpix_3            = seg_len * 3        # Anzahl LEDs im 3. Stripe
-    numpix_4            = seg_len * 3        # Anzahl LEDs im 4. Stripe
+    numpix_1            = seg_len * 2   # Anzahl LEDs im 1. Stripe
+    numpix_2            = seg_len * 2   # Anzahl LEDs im 2. Stripe
+    numpix_3            = seg_len * 3   # Anzahl LEDs im 3. Stripe
+    numpix_4            = seg_len * 3   # Anzahl LEDs im 4. Stripe
 
     seg_01_strip        = 0             #  1. Ledsegment -> Stripe
     seg_01_start        = 0             #  1. Ledsegment -> Start
